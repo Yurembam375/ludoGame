@@ -23,6 +23,8 @@ dependencies:
   equatable: ^2.0.5        # Update to a null-safe version
   provider: ^6.1.2         # Update to a null-safe version
   flutter_screenutil: ^5.9.3
+  flutter_launcher_icons: ^0.14.1
+ 
 dev_dependencies:
   flutter_test:
     sdk: flutter
