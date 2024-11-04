@@ -12,7 +12,7 @@ class Containerscreen extends StatelessWidget {
       "assets/image/Frame 958.png",
       "assets/image/Frame 959.png",
       "assets/image/Frame 960.png",
-      "assets/image/Frame 961.png",
+      "assets/image/Frame 961.png", 
     ];
 
     return Scaffold(

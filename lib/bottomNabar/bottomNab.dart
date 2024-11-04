@@ -1,11 +1,13 @@
+import 'dart:async';
+import 'dart:math'; // Corrected import for Random
+
 import 'package:flutter/material.dart';
 import 'package:ludo/Screen/HomeScreen.dart';
 import 'package:ludo/Screen/LeaderScreen.dart';
 import 'package:ludo/Screen/QuickguideScreen.dart';
 import 'package:ludo/Screen/StoreScreen.dart';
 import 'package:ludo/Screen/WalletScreen.dart';
-
-
+import 'package:ludo/widgets/containerScreen.dart';
 
 class BottomNab extends StatefulWidget {
   @override
@@ -13,6 +15,42 @@ class BottomNab extends StatefulWidget {
 }
 
 class _BottomNabState extends State<BottomNab> {
+  Timer? _randomPopupTimer;
+  final Random _random = Random();
+
+  @override
+  void initState() {
+    super.initState();
+    _scheduleRandomPopup(); // Schedule the random popup when the app starts
+  }
+
+  void _scheduleRandomPopup() {
+    // Schedule a popup between 5 to 15 seconds
+    final delay = Duration(seconds: 5 + _random.nextInt(10));
+    _randomPopupTimer = Timer(delay, _showRandomPopup);
+  }
+
+  void _showRandomPopup() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          backgroundColor: Colors.transparent,
+          child: Containerscreen(), // Show the Containerscreen as a popup
+        );
+      },
+    ).then((_) {
+      _scheduleRandomPopup(); // Reschedule the next random popup after closing
+    });
+  }
+
+  @override
+  void dispose() {
+    _randomPopupTimer?.cancel(); // Cancel the timer when the widget is disposed
+    super.dispose();
+  }
+
   int _selectedIndex = 2; // The index of the selected tab
 
   final List<Widget> _pages = [
@@ -142,3 +180,4 @@ class _BottomNabState extends State<BottomNab> {
     );
   }
 }
+
